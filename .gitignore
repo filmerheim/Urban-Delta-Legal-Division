@@ -1,4 +1,37 @@
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
 
+# Archivos temporales
+*.tmp
+*.log
+*.bak
+*.swp
 
-#Ignore vscode AI rules
-.github\instructions\codacy.instructions.md
+# Archivos de entorno local
+.env
+.env.local
+
+# Archivos de configuración de editores
+.vscode/
+.idea/
+*.sublime-*
+
+# Archivos de caché y directorios de dependencias
+node_modules/
+__pycache__/
+*.py[cod]
+
+# Archivos de compilación y distribución
+dist/
+build/
+*.min.js
+
+# Archivos específicos del proyecto
+# Añade aquí cualquier archivo o patrón específico que quieras ignorar
+
+# Archivos de credenciales y secretos
+*.pem
+*.key
+*.cert
