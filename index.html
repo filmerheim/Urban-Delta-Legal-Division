@@ -767,6 +767,24 @@
     .toolbar{grid-template-columns: 1fr}
     .card{grid-column: span 12}
     .modal-grid{grid-template-columns: 1fr}
+    
+    /* Mejoras para dispositivos móviles */
+    header h1 { font-size: 16px; }
+    header small { font-size: 11px; }
+    .logo-image { height: 30px; }
+    
+    .wrap { grid-template-columns: 1fr; }
+    aside { width: 100%; max-width: none; }
+    
+    .map-controls { right: 8px; gap: 4px; }
+    .map-controls button, .map-controls select { padding: 6px 8px; font-size: 11px; }
+    
+    .routes-container { width: 100%; max-width: none; }
+    .routes-toggle { width: calc(100% - 16px); }
+    
+    /* Ajustes para controles del mapa */
+    .maplibregl-ctrl-top-left .maplibregl-ctrl { margin: 5px 0 0 5px; }
+    .maplibregl-ctrl-group button { width: 26px; height: 26px; }
   }
   @media (min-width:1600px){
     dialog{
@@ -836,6 +854,25 @@
   /* Estilo para items de lugar */
   .place-item:active {
     transform: scale(0.98);
+  }
+  
+  /* Mejoras para interacción táctil */
+  @media (pointer: coarse) {
+    /* Aumentar área de toque para elementos interactivos */
+    button, .chip, .place-item, .route-button, summary {
+      min-height: 44px;
+    }
+    
+    /* Aumentar espacio entre elementos táctiles */
+    .place-item, .route-button {
+      margin-bottom: 8px;
+      padding: 10px 12px;
+    }
+    
+    /* Mejorar visibilidad de elementos activos */
+    button:active, .chip:active, .place-item:active, .route-button:active {
+      opacity: 0.7;
+    }
   }
 </style>
 
@@ -3503,7 +3540,22 @@
     orientation: null
   };
 
+  // Función para detectar si es un dispositivo móvil
+  function isMobileDevice() {
+    return (typeof window.orientation !== 'undefined') || 
+           (navigator.userAgent.indexOf('IEMobile') !== -1) ||
+           (navigator.userAgent.indexOf('Android') !== -1 && navigator.userAgent.indexOf('Mobile') !== -1) ||
+           (navigator.userAgent.indexOf('iPhone') !== -1) ||
+           (navigator.userAgent.indexOf('iPad') !== -1) ||
+           (navigator.userAgent.match(/iPad|iPhone|iPod|Android|BlackBerry|Windows Phone/i));
+  }
+  
   setInterval(() => {
+    // No aplicar esta detección en dispositivos móviles
+    if (isMobileDevice()) {
+      return; // Permitir acceso desde dispositivos móviles
+    }
+    
     const devThreshold = 160; // Variable local para evitar duplicados
     if (window.outerHeight - window.innerHeight > devThreshold || 
         window.outerWidth - window.innerWidth > devThreshold) {
